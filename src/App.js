@@ -1,4 +1,6 @@
 import "./App.css";
+import Home from "./Home";
+import Create from "./Create";
 
 function App() {
   const title = "Welcome to the new blog";
@@ -8,6 +10,10 @@ function App() {
 
   return (
     <div className="App">
+      {/* nesting the Navbar(.js) under the App(.js) */}
+      <Home />
+      <span> </span>
+      <Create />
       <div className="content">
         <h1>{title}</h1>
         <p>you have {count} hits</p>
