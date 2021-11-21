@@ -1,13 +1,20 @@
 import "./App.css";
 
 function App() {
+  const title = "Welcome to the new blog";
+  let count = 50;
+  const person = { name: "Owen", age: 13 };
+  const link = "https://www.songwenx.xyz";
+
   return (
     <div className="App">
       <div className="content">
-        <h1>App Component</h1>
-      </div>
-      <div className="newComponent">
-        <h1>an extra component</h1>
+        <h1>{title}</h1>
+        <p>you have {count} hits</p>
+        <p>
+          your name is {person.name} and you're {person.age} years old
+        </p>
+        <a href={link}>my webpage</a>
       </div>
     </div>
   );
