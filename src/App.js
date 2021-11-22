@@ -22,7 +22,7 @@ function App() {
       {/* nesting the Navbar(.js) under the App(.js) */}
       <Navbar title={title} />
       <div className="content">
-        <Home setTitle={setTitle} />
+        <Home title={title} setTitle={setTitle} />
         <Content />
       </div>
     </div>

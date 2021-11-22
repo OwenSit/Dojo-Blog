@@ -3,10 +3,11 @@ import BlogList from "./BlogList";
 
 let name = "Owen";
 let like = 0;
-const Home = ({ setTitle }) => {
+const Home = ({ title, setTitle }) => {
   // useState variable
   const [likeNum, setLike] = useState(like);
   const [blogs, setBlog] = useState(null);
+  const [isPending, setIsPending] = useState(true);
 
   // create func to handle blog post deletion
   // const handleDelete = (id) => {
@@ -19,13 +20,16 @@ const Home = ({ setTitle }) => {
   // useEffect() will be triggered everytime the page is re-renderred
   // we use it to fetch the blog data (once)
   useEffect(() => {
-    fetch(`http://localhost:8000/blogs`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setBlog(data);
-      });
+    setTimeout(() => {
+      fetch(`http://localhost:8000/blogs`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setBlog(data);
+          setIsPending(false);
+        });
+    }, 1000);
     // console.log("use effect from Home.js");
   }, []);
 
@@ -43,7 +47,8 @@ const Home = ({ setTitle }) => {
 
   return (
     <div className="home">
-      <h2>Welcome to Dojo Blog!</h2>
+      {isPending && <div>Loading...</div>}
+      <h2>Welcome to {title}!</h2>
       <h4>{likeNum} people have liked this page</h4>
       <button onClick={handleClick}>Like!</button>
       <button
@@ -60,7 +65,7 @@ const Home = ({ setTitle }) => {
           setTitle("Owen's Blog");
         }}
       >
-        Chenge title
+        Change title
       </button>
       {/* to display all the blogs */}
       {/* we make sure blogs is available before it's being displayed */}
