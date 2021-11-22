@@ -8,6 +8,7 @@ const Home = ({ title, setTitle }) => {
   const [likeNum, setLike] = useState(like);
   const [blogs, setBlog] = useState(null);
   const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
 
   // create func to handle blog post deletion
   // const handleDelete = (id) => {
@@ -23,11 +24,20 @@ const Home = ({ title, setTitle }) => {
     setTimeout(() => {
       fetch(`http://localhost:8000/blogs`)
         .then((res) => {
+          if (!res.ok) {
+            throw Error(`could not fetch the data`);
+          }
           return res.json();
         })
         .then((data) => {
           setBlog(data);
           setIsPending(false);
+          setError(null);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setIsPending(false);
+          console.log(err.message);
         });
     }, 1000);
     // console.log("use effect from Home.js");
@@ -48,6 +58,7 @@ const Home = ({ title, setTitle }) => {
   return (
     <div className="home">
       {isPending && <div>Loading...</div>}
+      {error && <div>{error}</div>}
       <h2>Welcome to {title}!</h2>
       <h4>{likeNum} people have liked this page</h4>
       <button onClick={handleClick}>Like!</button>
