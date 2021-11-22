@@ -3,7 +3,7 @@ import BlogList from "./BlogList";
 
 let name = "Owen";
 let like = 0;
-const Home = () => {
+const Home = ({ setTitle }) => {
   // useState variable
   const [likeNum, setLike] = useState(like);
   const [blogs, setBlog] = useState([
@@ -27,8 +27,8 @@ const Home = () => {
 
   // useEffect() will be triggered everytime the page is re-renderred
   useEffect(() => {
-    console.log("use effect ran");
-  });
+    console.log("use effect from Home.js");
+  }, []);
 
   // create a func that will be linked with the button
   const handleClick = () => {
@@ -55,6 +55,13 @@ const Home = () => {
         }}
       >
         Click me again!
+      </button>
+      <button
+        onClick={() => {
+          setTitle("Owen's Blog");
+        }}
+      >
+        Chenge title
       </button>
       {/* to display all the blogs */}
       <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />

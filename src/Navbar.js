@@ -1,7 +1,7 @@
-const Navbar = () => {
+const Navbar = ({ title }) => {
   return (
     <nav className="navbar">
-      <h1>Dojo Blog</h1>
+      <h1>{title}</h1>
       <div className="links">
         <a
           href="/"
