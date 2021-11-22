@@ -3,7 +3,16 @@ const Navbar = () => {
     <nav className="navbar">
       <h1>Dojo Blog</h1>
       <div className="links">
-        <a href="/">Home</a>
+        <a
+          href="/"
+          style={{
+            color: "green",
+            background: "yellow",
+            borderRadius: "8px",
+          }}
+        >
+          Home
+        </a>
         <a
           href="/create"
           style={{

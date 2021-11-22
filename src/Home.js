@@ -17,6 +17,14 @@ const Home = () => {
     },
   ]);
 
+  // create func to handle blog post deletion
+  const handleDelete = (id) => {
+    // delete blog post here and store the changes in a new array
+    const newBlogs = blogs.filter((blog) => blog.id !== id);
+    setBlog(newBlogs);
+    alert(`the blog post has been deleted`);
+  };
+
   // create a func that will be linked with the button
   const handleClick = () => {
     like += 1;
@@ -44,15 +52,17 @@ const Home = () => {
         Click me again!
       </button>
       {/* to display all the blogs */}
-      <BlogList blogs={blogs} title="All Blogs!" />
+      <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />
       {/* to dosplay only Mario's blogs */}
       <BlogList
         blogs={blogs.filter((blog) => blog.author === "mario")}
         title="Mario's Blogs"
+        handleDelete={handleDelete}
       />
       <BlogList
         blogs={blogs.filter((blog) => blog.author === "yoshi")}
         title="Yoshi's blogs"
+        handleDelete={handleDelete}
       />
     </div>
   );
