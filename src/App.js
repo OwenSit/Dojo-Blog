@@ -1,9 +1,8 @@
-import "./App.css";
 import Home from "./Home";
-import Create from "./Create";
+import Navbar from "./Navbar";
+import Content from "./Content";
 
 function App() {
-  const title = "Dojo Blog";
   let count = 50;
   const person = { name: "Owen", age: 13 };
   const link = "https://www.songwenx.xyz";
@@ -11,16 +10,10 @@ function App() {
   return (
     <div className="App">
       {/* nesting the Navbar(.js) under the App(.js) */}
+      <Navbar />
       <div className="content">
-        <h1>{title}</h1>
         <Home />
-        <span> </span>
-        <Create />
-        <p>you have {count} hits</p>
-        <p>
-          your name is {person.name} and you're {person.age} years old
-        </p>
-        <a href={link}>my webpage</a>
+        <Content />
       </div>
     </div>
   );
