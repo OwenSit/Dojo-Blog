@@ -1,9 +1,15 @@
+import { useState } from "react"; // we intend to use the react hook
+
+let name = "Owen";
 let like = 0;
 const Home = () => {
+  // useState variable
+  const [likeNum, setLike] = useState(like);
   // create a func that will be linked with the button
-  const handleClick = (e) => {
+  const handleClick = () => {
     like += 1;
-    console.log("you liked this page", e);
+    setLike(like);
+    console.log(`${likeNum} people have liked this page`);
   };
 
   const handleClickAgain = (name) => {
@@ -14,7 +20,7 @@ const Home = () => {
   return (
     <div className="home">
       <h2>Welcome to Dojo Blog!</h2>
-      <h4>{like} people have liked this page</h4>
+      <h4>{likeNum} people have liked this page</h4>
       <button onClick={handleClick}>Like!</button>
       <button
         onClick={(e) => {
