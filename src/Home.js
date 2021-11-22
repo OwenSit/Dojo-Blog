@@ -1,4 +1,4 @@
-import { useState } from "react"; // we intend to use the react hook
+import { useState, useEffect } from "react"; // we intend to use the react hook
 import BlogList from "./BlogList";
 
 let name = "Owen";
@@ -24,6 +24,11 @@ const Home = () => {
     setBlog(newBlogs);
     alert(`the blog post has been deleted`);
   };
+
+  // useEffect() will be triggered everytime the page is re-renderred
+  useEffect(() => {
+    console.log("use effect ran");
+  });
 
   // create a func that will be linked with the button
   const handleClick = () => {
