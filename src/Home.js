@@ -43,8 +43,17 @@ const Home = () => {
       >
         Click me again!
       </button>
-      <h5>Blogs:</h5>
-      <BlogList blogs={blogs} />
+      {/* to display all the blogs */}
+      <BlogList blogs={blogs} title="All Blogs!" />
+      {/* to dosplay only Mario's blogs */}
+      <BlogList
+        blogs={blogs.filter((blog) => blog.author === "mario")}
+        title="Mario's Blogs"
+      />
+      <BlogList
+        blogs={blogs.filter((blog) => blog.author === "yoshi")}
+        title="Yoshi's blogs"
+      />
     </div>
   );
 };
