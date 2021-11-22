@@ -5,6 +5,17 @@ let like = 0;
 const Home = () => {
   // useState variable
   const [likeNum, setLike] = useState(like);
+  const [blog, setBlog] = useState([
+    { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
+    { title: "Welcome party!", body: "lorem ipsum...", author: "yoshi", id: 2 },
+    {
+      title: "Web dev top tips",
+      body: "lorem ipsum...",
+      author: "mario",
+      id: 3,
+    },
+  ]);
+
   // create a func that will be linked with the button
   const handleClick = () => {
     like += 1;
@@ -14,7 +25,7 @@ const Home = () => {
 
   const handleClickAgain = (name) => {
     console.log(`hello ${name}!`);
-    alert(`"hello, ${name}!`);
+    alert(`hello, ${name}!`);
   };
 
   return (
@@ -31,6 +42,13 @@ const Home = () => {
       >
         Click me again!
       </button>
+      <h5>Blogs:</h5>
+      {blog.map((blog) => (
+        <div className="blog-preview" key={blog.id}>
+          <h2>{blog.title}</h2>
+          <p>Written by {blog.author}</p>
+        </div>
+      ))}
     </div>
   );
 };
