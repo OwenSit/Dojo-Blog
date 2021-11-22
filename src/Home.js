@@ -1,11 +1,12 @@
 import { useState } from "react"; // we intend to use the react hook
+import BlogList from "./BlogList";
 
 let name = "Owen";
 let like = 0;
 const Home = () => {
   // useState variable
   const [likeNum, setLike] = useState(like);
-  const [blog, setBlog] = useState([
+  const [blogs, setBlog] = useState([
     { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
     { title: "Welcome party!", body: "lorem ipsum...", author: "yoshi", id: 2 },
     {
@@ -43,12 +44,7 @@ const Home = () => {
         Click me again!
       </button>
       <h5>Blogs:</h5>
-      {blog.map((blog) => (
-        <div className="blog-preview" key={blog.id}>
-          <h2>{blog.title}</h2>
-          <p>Written by {blog.author}</p>
-        </div>
-      ))}
+      <BlogList blogs={blogs} />
     </div>
   );
 };
