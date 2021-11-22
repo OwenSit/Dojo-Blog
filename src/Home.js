@@ -6,28 +6,27 @@ let like = 0;
 const Home = ({ setTitle }) => {
   // useState variable
   const [likeNum, setLike] = useState(like);
-  const [blogs, setBlog] = useState([
-    { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
-    { title: "Welcome party!", body: "lorem ipsum...", author: "yoshi", id: 2 },
-    {
-      title: "Web dev top tips",
-      body: "lorem ipsum...",
-      author: "mario",
-      id: 3,
-    },
-  ]);
+  const [blogs, setBlog] = useState(null);
 
   // create func to handle blog post deletion
-  const handleDelete = (id) => {
-    // delete blog post here and store the changes in a new array
-    const newBlogs = blogs.filter((blog) => blog.id !== id);
-    setBlog(newBlogs);
-    alert(`the blog post has been deleted`);
-  };
+  // const handleDelete = (id) => {
+  //   // delete blog post here and store the changes in a new array
+  //   const newBlogs = blogs.filter((blog) => blog.id !== id);
+  //   setBlog(newBlogs);
+  //   alert(`the blog post has been deleted`);
+  // };
 
   // useEffect() will be triggered everytime the page is re-renderred
+  // we use it to fetch the blog data (once)
   useEffect(() => {
-    console.log("use effect from Home.js");
+    fetch(`http://localhost:8000/blogs`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setBlog(data);
+      });
+    // console.log("use effect from Home.js");
   }, []);
 
   // create a func that will be linked with the button
@@ -64,18 +63,29 @@ const Home = ({ setTitle }) => {
         Chenge title
       </button>
       {/* to display all the blogs */}
-      <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />
+      {/* we make sure blogs is available before it's being displayed */}
+      {blogs && (
+        <BlogList
+          blogs={blogs}
+          title="All Blogs!"
+          // handleDelete={handleDelete}
+        />
+      )}
       {/* to dosplay only Mario's blogs */}
-      <BlogList
-        blogs={blogs.filter((blog) => blog.author === "mario")}
-        title="Mario's Blogs"
-        handleDelete={handleDelete}
-      />
-      <BlogList
-        blogs={blogs.filter((blog) => blog.author === "yoshi")}
-        title="Yoshi's blogs"
-        handleDelete={handleDelete}
-      />
+      {blogs && (
+        <BlogList
+          blogs={blogs.filter((blog) => blog.author === "mario")}
+          title="Mario's Blogs"
+          // handleDelete={handleDelete}
+        />
+      )}
+      {blogs && (
+        <BlogList
+          blogs={blogs.filter((blog) => blog.author === "yoshi")}
+          title="Yoshi's blogs"
+          // handleDelete={handleDelete}
+        />
+      )}
     </div>
   );
 };
