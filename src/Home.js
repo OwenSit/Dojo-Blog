@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react"; // we intend to use the react hook
 import BlogList from "./BlogList";
+import useFetch from "./usefetch";
 
 let name = "Owen";
 let like = 0;
 const Home = ({ title, setTitle }) => {
-  // useState variable
   const [likeNum, setLike] = useState(like);
-  const [blogs, setBlog] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
+  const { data, isPending, error } = useFetch(`http://localhost:8000/blogs`);
 
   // create func to handle blog post deletion
   // const handleDelete = (id) => {
@@ -17,31 +15,6 @@ const Home = ({ title, setTitle }) => {
   //   setBlog(newBlogs);
   //   alert(`the blog post has been deleted`);
   // };
-
-  // useEffect() will be triggered everytime the page is re-renderred
-  // we use it to fetch the blog data (once)
-  useEffect(() => {
-    setTimeout(() => {
-      fetch(`http://localhost:8000/blogs`)
-        .then((res) => {
-          if (!res.ok) {
-            throw Error(`could not fetch the data`);
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setBlog(data);
-          setIsPending(false);
-          setError(null);
-        })
-        .catch((err) => {
-          setError(err.message);
-          setIsPending(false);
-          console.log(err.message);
-        });
-    }, 1000);
-    // console.log("use effect from Home.js");
-  }, []);
 
   // create a func that will be linked with the button
   const handleClick = () => {
@@ -80,24 +53,24 @@ const Home = ({ title, setTitle }) => {
       </button>
       {/* to display all the blogs */}
       {/* we make sure blogs is available before it's being displayed */}
-      {blogs && (
+      {data && (
         <BlogList
-          blogs={blogs}
+          blogs={data}
           title="All Blogs!"
           // handleDelete={handleDelete}
         />
       )}
       {/* to dosplay only Mario's blogs */}
-      {blogs && (
+      {data && (
         <BlogList
-          blogs={blogs.filter((blog) => blog.author === "mario")}
+          blogs={data.filter((blog) => blog.author === "mario")}
           title="Mario's Blogs"
           // handleDelete={handleDelete}
         />
       )}
-      {blogs && (
+      {data && (
         <BlogList
-          blogs={blogs.filter((blog) => blog.author === "yoshi")}
+          blogs={data.filter((blog) => blog.author === "yoshi")}
           title="Yoshi's blogs"
           // handleDelete={handleDelete}
         />
