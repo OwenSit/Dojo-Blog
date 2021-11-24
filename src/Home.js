@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"; // we intend to use the react hook
+import { useState } from "react"; // we intend to use the react hook
 import BlogList from "./BlogList";
 import useFetch from "./usefetch";
 
-let name = "Owen";
+// let name = "Owen";
 let like = 0;
 const Home = ({ title, setTitle }) => {
   const [likeNum, setLike] = useState(like);

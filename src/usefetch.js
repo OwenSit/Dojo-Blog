@@ -8,8 +8,9 @@ const useFetch = (url) => {
   // useEffect() will be triggered everytime the page is re-renderred
   // we use it to fetch the blog data (once)
   useEffect(() => {
+    const abortCont = new AbortController();
     setTimeout(() => {
-      fetch(url)
+      fetch(url, { signal: abortCont.signal })
         .then((res) => {
           if (!res.ok) {
             throw Error(`could not fetch the data`);
@@ -22,13 +23,18 @@ const useFetch = (url) => {
           setError(null);
         })
         .catch((err) => {
-          setError(err.message);
-          setIsPending(false);
-          console.log(err.message);
+          if (err.name === "AbortError") {
+            console.log("fetch aborted");
+          } else {
+            setError(err.message);
+            setIsPending(false);
+            console.log(err.message);
+          }
         });
     }, 1000);
+    return () => abortCont.abort();
     // console.log("use effect from Home.js");
-  }, []);
+  }, [url]);
   return { data, isPending, error };
 };
 

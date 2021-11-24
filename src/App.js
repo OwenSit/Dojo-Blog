@@ -4,11 +4,12 @@ import Content from "./Content";
 import Create from "./Create";
 import { useState, useEffect } from "react/cjs/react.development";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import BlogDetails from "./BlogDetails";
 
 function App() {
-  let count = 50;
-  const person = { name: "Owen", age: 13 };
-  const link = "https://www.songwenx.xyz";
+  // let count = 50;
+  // const person = { name: "Owen", age: 13 };
+  // const link = "https://www.songwenx.xyz";
 
   // create useState for the page title
   const [title, setTitle] = useState("Dojo Blog");
@@ -34,6 +35,9 @@ function App() {
             </Route>
             <Route exact path="/create">
               <Create />
+            </Route>
+            <Route exact path="/blogs/:id">
+              <BlogDetails />
             </Route>
           </Switch>
         </div>
