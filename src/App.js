@@ -2,6 +2,7 @@ import Home from "./Home";
 import Navbar from "./Navbar";
 import Content from "./Content";
 import { useState, useEffect } from "react/cjs/react.development";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   let count = 50;
@@ -18,14 +19,24 @@ function App() {
     console.log("useEffect from App.js");
   }, [title]);
   return (
-    <div className="App">
-      {/* nesting the Navbar(.js) under the App(.js) */}
-      <Navbar title={title} />
-      <div className="content">
-        <Home title={title} setTitle={setTitle} />
-        <Content />
+    <Router>
+      <div className="App">
+        {/* nesting the Navbar(.js) under the App(.js) */}
+        <Navbar title={title} />
+        <div className="content">
+          <Switch>
+            <Route path="/">
+              <Home title={title} setTitle={setTitle} />
+            </Route>
+          </Switch>
+          <Switch>
+            <Route path="/content">
+              <Content />
+            </Route>
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
