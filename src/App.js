@@ -1,6 +1,7 @@
 import Home from "./Home";
 import Navbar from "./Navbar";
 import Content from "./Content";
+import Create from "./Create";
 import { useState, useEffect } from "react/cjs/react.development";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -25,13 +26,14 @@ function App() {
         <Navbar title={title} />
         <div className="content">
           <Switch>
-            <Route path="/">
+            <Route exact path="/">
               <Home title={title} setTitle={setTitle} />
             </Route>
-          </Switch>
-          <Switch>
-            <Route path="/content">
+            <Route exact path="/content">
               <Content />
+            </Route>
+            <Route exact path="/create">
+              <Create />
             </Route>
           </Switch>
         </div>
