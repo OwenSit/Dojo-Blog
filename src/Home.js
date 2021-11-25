@@ -1,6 +1,6 @@
 import { useState } from "react"; // we intend to use the react hook
 import BlogList from "./BlogList";
-import useFetch from "./usefetch";
+import useFetch from "./useFetch";
 
 // let name = "Owen";
 let like = 0;
