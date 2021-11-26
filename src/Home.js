@@ -1,4 +1,4 @@
-import { useState } from "react"; // we intend to use the react hook
+import { useState } from "react"; // we intend to use the react hook.
 import BlogList from "./BlogList";
 import useFetch from "./useFetch";
 
