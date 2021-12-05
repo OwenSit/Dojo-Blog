@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 
 // for the Create page of the navigation bar
 const Create = () => {
@@ -6,6 +7,7 @@ const Create = () => {
   const [body, setBody] = useState("Default Body");
   const [author, setAuthor] = useState("mario");
   const [isPending, setIsPending] = useState(false);
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     console.log("hello");
@@ -22,6 +24,7 @@ const Create = () => {
       setTimeout(() => {
         setIsPending(false);
       }, 1000);
+      history.push("/");
     });
   };
 
