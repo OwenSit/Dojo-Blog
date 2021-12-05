@@ -5,7 +5,7 @@ import Create from "./Create";
 import { useState, useEffect } from "react/cjs/react.development";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import BlogDetails from "./BlogDetails";
-
+import NotFound from "./NotFound";
 function App() {
   // let count = 50;
   // const person = { name: "Owen", age: 13 };
@@ -36,8 +36,11 @@ function App() {
             <Route exact path="/create">
               <Create />
             </Route>
-            <Route exact path="/blogs/:id">
+            <Route path="/blogs/:id">
               <BlogDetails />
+            </Route>
+            <Route path="*">
+              <NotFound />
             </Route>
           </Switch>
         </div>
